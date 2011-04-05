@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>Universe Journey. Add new story</title>
+</head>
+<body>
+	<h1>Add new story</h1>
+	 <h3>Write you story</h3>
+<form action="/add/" method="post">
+	{% load wysiwyg %}
+		{% wysiwyg_setup %}
+		<textarea id="foo" name="foo"></textarea>
+		<input type="submit">
+		{% wysiwyg_editor "foo" %}
+</form>
+</body>
+</html>

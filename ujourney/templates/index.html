@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>Universe Journey</title>
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/style.css" />
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.spasticNav.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui-1.8.11.custom.min.js" ></script>
+</head>
+<body>
+<h1>Welcome to Universe Journey!</h1>
+<h3>Мантра: "Игровая социальная сеть образованных геймеров"</h3>
+<table>
+<tr><td><div id="container">
+    <ul id="nav">
+        <li id="selected"><a href="http://127.0.0.1:8000/">Home</a></li>
+        <li><a href="http://127.0.0.1:8000/level0/rules/">Level 0.0</a></li>
+        <li><a href="http://127.0.0.1:8000/level1/">Level 1.0</a></li>
+        <li><a href="#">Level 2.0</a></li>
+        <li><a href="#">Level 3.0</a></li>
+    </ul>
+</div>
+</td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td>
+    <form action='level1/login/' method='post'>
+        <label for="username">Login:</label>
+        <input type="text" name="login" value="" id="username">
+        <label for="password">Password:</label>
+        <input type="password" name="password" value="" id="password">
+        <input type="submit" value="Sign in" />
+        <input type="hidden" name="next" value="{{ next|escape }}" />
+      </form>
+</td></tr>
+</table>
+<script type="text/javascript">
+    $('#nav').spasticNav();
+</script>
+</body>
+</html>

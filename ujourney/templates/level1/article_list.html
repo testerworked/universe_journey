@@ -1,0 +1,22 @@
+<html>
+<head>
+	<title>Article list</title>
+	<link type="text/css" rel="stylesheet" media="all" href="/static/css/borders.css" />
+</head>
+<body>
+{% block content %}
+    <h1>Universe Journey</h1>
+    <table>
+
+        {% for view_article in object_list %}
+            <div id="full-border1">
+            {{ view_article.article }}<br>
+			{{ view_article.date }}
+            {{ view_article.user }}
+            </div>
+        {% endfor %}
+
+{% endblock %}
+    </table>
+</body>
+</html>

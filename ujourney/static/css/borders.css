@@ -1,0 +1,130 @@
+/* ------------------------------------------
+Несколько обводок для элемента с использованием CSS 2.1
+Автор: Nicolas Gallagher
+http://nicolasgallagher.com/multiple-backgrounds-and-borders-with-css2/
+http://nicolasgallagher.com
+http://twitter.com/necolas
+
+Разработано: 09 Июня 2010
+Версия: 1.0
+
+Перевод: команда сайта RUSELLER.COM
+http://ruseller.com/
+
+Распорстраняется по лицензиям MIT и GNU GPLv2 © Nicolas Gallagher 
+------------------------------------------ */
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------
+== Общие стили
+** ---------------------------------------------------------------------------------------------------------------------------- */
+
+html, body                             {padding:0; margin:0; font:1em/1.4 Cambria, Georgia, sans-serif; color:#333; background:#fff;}
+article, aside, footer, header,
+hgroup, section                        {display:block;}
+
+a:link, a:visited                      {border-bottom:1px solid #c55500; color:#c55500; text-decoration:none;}
+a:visited                              {border-bottom:1px solid #730800; color:#730800;}
+a:hover, a:focus, a:active             {border:0; color:#fff; background:#c55500;}
+a:visited:hover,
+ a:visited:focus,
+ a:visited:active                      {color:#fff; background:#730800;}
+
+.container                             {width:640px; padding:0 0 10px; margin:0 auto 40px;}
+.header                                {border-bottom:1px solid #ddd;}
+
+.examples                              {width:800px; margin:0 auto; overflow:hidden;}
+.examples .section                     {float:left; width:380px; margin:0 0 20px 40px; text-align:center;}
+.examples .section:first-child         {margin-left:0;}
+.examples .section div                 {margin:0 0 20px;}
+
+h1                                     {margin:1em 0 0; font-size:2.5em; font-weight:normal; line-height:1.2; text-align:center;}
+h2                                     {margin:0.5em 0 1.5em; font-size:1.25em; font-weight:normal; font-style:italic; text-align:center;}
+p                                      {margin:1em 0; line-height:1.4em;}
+
+pre                                    {margin:1.4em 0; font-size:12px; line-height:1.4em; white-space:pre-wrap; word-wrap:break-word;}
+
+.follow                                {clear:both; margin-top:2em; font-size:1.125em;}
+.follow span                           {font-weight:bold;}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------
+== Примеры
+** ---------------------------------------------------------------------------------------------------------------------------- */
+
+#full-border1                          {position:relative; z-index:10; padding:20px; background:#eee;}
+#full-border1:before                   {content:""; display:block; position:absolute; z-index:-1; top:5px; left:5px; right:5px; 
+                                        bottom:5px; border:1px solid #000;}
+
+#full-border2                          {position:relative; z-index:10; padding:15px; border:5px solid #f00; background:#fff;}
+#full-border2:before                   {content:""; display:block; position:absolute; z-index:-1; top:0; left:0; right:0; 
+                                        bottom:0; border:1px solid #000;}
+
+#full-border3                          {position:relative; z-index:10; padding:20px; border:5px solid #f00; background:#ff9600;}
+#full-border3:before                   {content:""; display:block; position:absolute; z-index:-1; top:5px; left:5px; right:5px; 
+                                        bottom:5px; border:5px solid #ffea00; background:#fff;}
+
+#full-border4                          {position:relative; z-index:10; padding:30px; border:5px solid #f00; background:#ff9600;}
+#full-border4:before                   {content:""; display:block; position:absolute; z-index:-1; top:5px; left:5px; right:5px; 
+                                        bottom:5px; border:5px solid #ffea00; background:#4aa929;}
+#full-border4:after                    {content:""; display:block; position:absolute; z-index:-1; top:15px; left:15px; right:15px; 
+                                        bottom:15px; border:5px solid #00b4ff; background:#fff;}
+
+#full-border5                          {position:relative; z-index:10; padding:40px; border:5px solid #f00; background:#ff9600;}
+#full-border5:before                   {content:""; display:block; position:absolute; z-index:-1; top:5px; left:5px; right:5px; 
+                                        bottom:5px; border:5px solid #ffea00; background:#4aa929;}
+#full-border5:after                    {content:""; display:block; position:absolute; z-index:-1; top:25px; left:25px; right:25px; 
+                                        bottom:25px; border:5px solid #f000ff; background:#fff;}
+#full-border5 p:first-child            {margin-top:0;}
+#full-border5 p:first-child:before     {content:""; display:block; position:absolute; z-index:-1; top:15px; left:15px; right:15px; 
+                                        bottom:15px; border:5px solid #00b4ff; background:#7200ff;}
+
+#two-colour                            {position:relative; padding:10px 10px 11px; border-bottom:2px solid #ccc; color:#000; 
+                                        background:#f0f0f0;}
+#two-colour:before                     {content:""; display:block; position:absolute; left:0; bottom:0; width:100%; height:1px; 
+                                        background:#fefefe;}
+
+#single-max                            {position:relative; padding:10px 10px 50px; border-bottom:5px solid #f000ff; background:#eee;}
+#single-max:after                      {content:""; display:block; position:absolute; left:0; bottom:15px; width:100%; 
+                                        border-top:5px solid #ff0000; border-bottom:5px solid #ffea00; background:#ff9600; height:5px;}
+#single-max:before                     {content:""; display:block; position:absolute; left:0; bottom:0; width:100%; 
+                                        border-top:5px solid #4aa929; border-bottom:5px solid #7200ff; background:#00b4ff; height:5px;}
+
+/* ----------------------------------------------------------------------------------------------------------------------------
+== Обводка FABW (как на сайте http://forabeautifulweb.com/blog)
+** ---------------------------------------------------------------------------------------------------------------------------- */
+
+/* Основные стили для FABW */
+
+#irregular                             {font:14px/1.4 Georgia, "Times New Roman", Times, serif; color:rgb(0,0,0); margin:0 auto 40px; 
+                                        padding:0 30px 10px; background:#e3d4c1 url(malarky.png) repeat 0 0; text-align:left;}
+#irregular .content                    {position:relative; float:left; width:60%; padding-right:18px; border-right:2px solid #ede5da}
+#irregular .supp                       {float:right; width:30%;}
+#irregular h2                          {margin:20px 40px 1em; font-size:1.5em; text-align:center;}
+#irregular h3                          {font-size:1em; line-height:1; margin:0 0 1em; font-weight:normal;}
+#irregular h4                          {font-size:15px; line-height:1.25; margin:0 0 1.25em; font-weight:normal;}
+#irregular p                           {font-size:12px; margin:0 0 1.5em;}
+#irregular .article                    {position:relative; margin-bottom:1em;}
+#irregular .article h4                 {margin-right:20px;}
+#irregular .article a.comments         {position:absolute; display:block; top:4px; right:0; font:11px Arial, sans-serif; letter-spacing:1px;}
+#irregular .article .time              {display:inline; font:11px "Helvetica Neue", Arial, sans-serif; text-transform:uppercase;
+                                        letter-spacing:1px;}
+
+/* Создаем двухцветную неравномерную обводку без изображений */
+
+#irregular                             {position:relative; overflow:hidden;}
+#irregular:before, #irregular:after    {content:""; position:absolute; top:35px; left:20px; width:45px; height:17px; 
+                                        border:2px solid #cdbba0; border-width:2px 0 0 2px;}
+#irregular:after                       {left:auto; right:20px; border-width:2px 2px 0 0;}
+
+#irregular h2:before,
+#irregular h2:after                   {content:""; position:absolute; top:37px; left:22px; width:43px; height:15px; 
+                                        border:2px solid #ede5da; border-width:2px 0 0 2px;}
+#irregular h2:after                    {left:auto; right:22px; border-width:2px 2px 0 0;}
+
+#irregular .content:before             {content:""; background:#cdbba0; width:2px; height:100%; position:absolute; top:0; right:0;}
+
+#irregular .article .foot              {overflow:hidden;}
+#irregular .article .time              {position:relative;}
+#irregular .article .time:before       {position:absolute; content:""; top:50%; left:100%; width:500px; border-top:1px solid #D0BFA6; 
+                                        border-bottom:1px solid #EFE7DC; margin:-1px 0 0 10px;}

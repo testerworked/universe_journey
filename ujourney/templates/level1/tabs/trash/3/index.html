@@ -1,0 +1,28 @@
+<html>
+<head>
+ <title>Universe Journey. Level 1.</title>
+    <script src="jquery.tools.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="standalone.css"/>   
+    <link rel="stylesheet" type="text/css" href="tabs-no-images.css"/>
+</head>
+<body>
+<!-- tabs -->
+<ul class="css-tabs">
+	<li><a href="http://127.0.0.1:8000/level1/articles/">Tab 1</a></li>
+	<li><a href="http://127.0.0.1:8000/level1/add/">Second tab</a></li>
+	<li><a href="file:///C:/testers/mtest/megaproject/ujourney/templates/level1/article_list.html/">An ultra long third tab</a></li>
+</ul>
+
+<!-- single pane. it is always visible -->
+<div class="css-panes">
+	<div style="display:block"></div>
+</div>
+<script>
+$(function() {
+
+	$("ul.css-tabs").tabs("div.css-panes > div", {effect: 'ajax'});
+
+});
+</script>
+</body>
+</html>

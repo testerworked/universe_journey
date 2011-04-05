@@ -1,0 +1,203 @@
+<html>
+<head>
+<script type="text/javascript" src="../media/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	alert("java-scripts worked!!!");
+    $(".pane .delete").click(function(){
+        $(this).parents(".pane").animate({ opacity: "hide" }, "slow");
+    });
+ 
+});
+</script>
+<script type="text/javascript">
+(function($)    {
+    function form_data(form)   {
+        return form.find("input[checked], input[type='text'], input[type='hidden'], input[type='password'], input[type='submit'], option[selected], textarea").filter(':enabled');
+    }
+    function inputs(form)   {
+        return form.find("input, select, textarea")
+    }
+ 
+ $.fn.last_submit_data = null;
+    
+    $.fn.submit_form = function(url, settings) {
+        settings = $.extend({
+            type: 'table',
+            callback: false,
+            fields: false,
+        }, settings);
+        var form = $(this);
+ 
+  var params = {};
+        form_data(form).each(function() {
+            params[ this.name || this.id || this.parentNode.name || this.parentNode.id ] = this.value; 
+        });
+        
+        var status = false;
+        if (settings.fields) {
+            params.fields = settings.fields;
+        }
+        $.ajax({
+            async: false,
+            data: params,
+            dataType: 'json',
+            error: function(XHR, textStatus, errorThrown)   {
+                status = false;
+            },
+            success: function(data, textStatus) {
+                status = data.saved;
+                if (!status)    {
+
+                if (settings.callback)  {
+                    settings.callback(data, form);
+                }
+                else{
+                    if (settings.type == 'p')    {
+                        inputs(form).parent().prev('ul').remove();
+                        inputs(form).parent().prev('ul').remove();
+                        $.each(data.errors, function(key, val){
+                            if (key == '__all__'){
+                            var error = inputs(form).filter(':first').parent();
+                            if (error.prev().is('ul.errorlist')) {
+                            error.prev().before('<ul class="errorlist"><li>' + val + '</li></ul>');
+                            }
+                            else{
+                            error.before('<ul class="errorlist"><li>' + val +'</li></ul>');
+                            }
+                            }
+                            else{
+                            $('#' + key).parent().before('<ul class="errorlist"><li>' + val + '</li></ul>');
+                            }
+                            });
+                        }
+                        if (settings.type == 'table')   {
+                            inputs(form).prev('ul').remove();
+inputs(form).filter(':first').parent().parent().prev('tr').remove();
+                            $.each(data.errors, function(key, val)  {
+                            if (key == '__all__')   {
+                           inputs(form).filter(':first').parent().parent().before('<ul class="errorlist"><li>' + val + '.</li></ul>');
+                            }
+                            else{
+                            $('#' + key).before('<ul class="errorlist"><li>' + val + '</li></ul>');
+                            }
+                            });
+                        }
+                        if (settings.type == 'ul')  {
+                            inputs(form).prev().prev('ul').remove();
+ inputs(form).filter(':first').parent().prev('li').remove();
+                            $.each(data.errors, function(key, val)  {
+                            if (key == '__all__')   {
+                            inputs(form).filter(':first').parent().before('<li><ul class="errorlist"><li>' + val + '</li></ul></li>');
+                            }
+                            else {
+                            $('#' + key).prev().before('<ul class="errorlist"><li>' + val + '</li></ul>');
+                            }
+                            });
+                        }
+                    }
+                }
+    $.fn.last_submit_data = data
+            },
+            type: 'POST',
+            url: url
+        });
+        return status;
+    };
+})(jQuery);
+</script>
+<style type="text/css"> 
+body {
+	margin: 10px auto;
+	width: 470px;
+}
+h3 {
+	margin: 0;
+	padding: 0 0 .3em;
+}
+p {
+	margin: 0;
+	padding: 0 0 .5em;
+}
+.pane {
+	background: #edf5e1;
+	padding: 10px 20px 10px;
+	position: relative;
+	border-top: solid 2px #c4df9b;
+}
+.pane .delete {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+</style> 
+</head>
+<body>
+<img src="header.JPG" alt="Universe Journey" align="center" width=500 height=150 />
+	<div class="pane">
+		<h3>header0</h3>
+		<p>blablabla000001</p>
+		<img src="SunEclipse.JPG" class="delete" width="50" height="50" />
+	</div>
+	<div class="pane">
+		<h3>header1</h3>
+		<p>blablabla0000002</p>
+		<img src="SunEclipse.JPG" class="delete" width="50" height="50" />
+	</div><!-- block out -->
+	{% block content %}
+	{% for post in posts %}
+		<h2>{{ post.title }}</h2>
+		<p>{{ post.timestamp|date:"1, F jS" }}</p>
+		<p>{{ post.body }}</p>
+	{% endfor %}
+	{% for row in out_rows %}
+		<h2>{{ row }}</h2>
+	{% endfor %}
+	{% endblock %}
+	
+<br><!-- block in -->	
+<h1>Write you story</h1>
+	{% if form.errors %}
+		<p style="color: red;">
+			Correct this errors{{ form.errors|pluralize }}
+		</p>
+		{% endif %}
+		<form action="" method="post">
+		{% csrf_token %}
+			<div class="field">
+				{{ form.name.errors }}
+				<label for="id_name">My name:</label>
+				{{ form.name }}
+			</div>
+			<div class="field">
+				{{ form.date.errors }}
+				<label for="id_date">Date:</label>
+				{{ form.date }}
+			</div>
+			<div class="field">
+				{{ form.story.errors }}
+				<label for="id_story">Story:</label>
+				{{ form.story }}
+			</div>
+			<input type="submit" value="Send">
+		</form>
+<!--ajax forms -->		
+<script>
+function submit_item(form, url){
+ if ($(form).submit_form(url, {type: 'table'})) {
+  alert('You message saved! My congratulations!');
+ }
+}
+</script>
+<div id="main">{{ form }}
+<table id="my_form" width="150px;"><tbody><tr><td></td><td>
+
+<input type="button" value="Save" onclick="javascript:submit_item('#my_form','{% url submit %}');">
+
+<input type="button" value="Cancel">
+
+</td></tr>
+</tbody></table></div>
+</body>
+</html>
